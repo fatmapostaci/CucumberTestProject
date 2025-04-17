@@ -6,13 +6,10 @@ import java.util.Properties;
 
 public class ConfigReader {
     /*
-ConfigurationReader class test method’larimiz ile config.properties
-arasinda iletisimi saglar.
+ConfigurationReader class test method’larimiz ile config.properties arasinda iletisimi saglar.
 Bu class’da test class’larindan kolayca ulasmak icin static method bulunur
-Method static oldugundan method icerisinden cagiracagimiz variable da
-static olmalidir.
-Kullanacagimiz static variable’a ilk degeri atamak icin(instantiate) de static block
-kullaniriz.
+Method static oldugundan method icerisinden cagiracagimiz variable da static olmalidir.
+Kullanacagimiz static variable’a ilk degeri atamak icin(instantiate) de static block kullaniriz.
 */
     public static Properties properties;   //Create Properties instance
 
@@ -20,7 +17,7 @@ kullaniriz.
         String filePath="config.properties";  //path of the configuration file
         try {
             FileInputStream fis=new FileInputStream(filePath);
-            // fis dosyayolunu tanimladigimiz configuration.properties dosyasini okudu
+            // fis dosya yolunu tanimladigimiz configuration.properties dosyasini okudu
             properties=new Properties();
             properties.load(fis); // fis'in okudugu bilgileri properties'e yukledi
             //close the file
