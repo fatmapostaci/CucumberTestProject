@@ -9,9 +9,13 @@ import org.junit.runner.RunWith;
         plugin = {"pretty", "html:target/cucumber-report.html"},
         features = "src/test/resources/features",
         glue = "ondia/stepdefinitions",
-        tags = "@ScenarioOutline",   //belli tagleri çalıtıracak, featurelara tag vereceğim
+     //   tags = "@ScenarioOutline",   //belli tagleri çalıtıracak, featurelara tag vereceğim
         //   tags = "@NegativeLogin",
-        dryRun = true
+//        tags = "@FormScenario",
+//        tags = "@ToDoList",
+//        tags = "@FormListOfList",
+        tags = "@Hw01",
+        dryRun = false
 
 )
 public class Runner {

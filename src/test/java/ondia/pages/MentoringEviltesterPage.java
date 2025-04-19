@@ -45,7 +45,6 @@ public class MentoringEviltesterPage {
                 if(name.equals("Bob"))
                     result=amount;
             }
-
         }
         return result;
     }
@@ -67,7 +66,6 @@ public class MentoringEviltesterPage {
                 System.out.println("w.getText() true= " + w.getText());
                 result= true;
             }
-
         }
         return result;
     }
