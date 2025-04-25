@@ -6,7 +6,7 @@ Feature: Login Test
   Background: User goes to homepage
     Given user goes to homepage
 
-
+@PositiveLogin
   Scenario Outline: Positive login Test
     When user enters email "<email>"
     And user enters password "<password>"

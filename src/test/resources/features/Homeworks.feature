@@ -26,3 +26,18 @@ Feature:
       | title8  | note4 |
       | title9  | note1 |
       | title10 | note1 |
+
+
+
+@  #  /*
+#  Go to https://testpages.eviltester.com/styled/validation/input-validation.html
+#  Fill form and submit
+#  Do this with 3 scenarios
+#  Use background and scenario outline
+#  */
+@Hw02
+Scenario Outline: Fill form and Submit
+  When
+  And
+  Then
+  Examples:

@@ -7,6 +7,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import ondia.pages.EvilTesterFormDetailsPage;
 import ondia.pages.EvilTesterFormPage;
+import ondia.utils.Driver;
 import org.junit.Assert;
 
 import java.util.List;
@@ -57,4 +58,25 @@ public class EvilTest_stepdefinitions {
         List<List<String>> listOfCredentials = dataTable.asLists();
         formPage.enterCredentials(listOfCredentials);
     }
+
+    @When("user enters username password and comment with heading")
+    public void user_enters_username_password_and_comment_with_heading(DataTable dataTable) {
+
+        List<Map<String,String>> daMapList = dataTable.asMaps();
+
+        for(Map<String,String> dataMap : daMapList){
+            formPage.enterUserName(dataMap.get("name"));
+            formPage.enterPassword(dataMap.get("pass"));
+            formPage.enterComment(dataMap.get("comm"));
+            formPage.clickSubmit();
+            //alert çıkarsa geçmek için try catch yapıalbilir, bekleme eklemek gerekebilir
+//            try {
+//                Driver.getDriver().switchTo().alert().accept();
+//            } catch (Exception e) {
+//                Driver.getDriver().navigate().back();
+//            }
+
+        }
+    }
+
 }

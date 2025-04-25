@@ -25,36 +25,56 @@ public class EvilTesterFormPage {
     private WebElement submitButton;
 
     public EvilTesterFormPage() {
-        PageFactory.initElements(getDriver(),this);
+        PageFactory.initElements(getDriver(), this);
     }
 
-    public void enterUserName(String username){
+    public void enterUserName(String username) {
         userNameField.sendKeys(username);
     }
-    public void enterPassword(String pass){
+
+    public void enterPassword(String pass) {
         passwordField.sendKeys(pass);
     }
-    public void enterComment(String comm){
+
+    public void enterComment(String comm) {
         commentField.clear();
         commentField.sendKeys(comm);
     }
-    public void clickSubmit(){
+
+    public void clickSubmit() {
         submitButton.click();
     }
 
 
     public void enterUserNameAndComment(Map<String, String> dataMap) {
-        for ( Map.Entry<String, String> entry: dataMap.entrySet()){
+        boolean isAllDataEntered = true;
+        for (Map.Entry<String, String> entry : dataMap.entrySet()) {
+            userNameField.clear();
             userNameField.sendKeys(entry.getKey());
             commentField.clear();
             commentField.sendKeys(entry.getValue());
+
+            // Gerçel bir senaryoya çevirmek istersek
+            submitButton.click();
+            EvilTesterFormDetailsPage detailsPage = new EvilTesterFormDetailsPage();
+            if (!detailsPage.isCommentLineContain(entry.getValue())) {
+                isAllDataEntered = false;
+                getDriver().get("https://testpages.eviltester.com/styled/basic-html-form-test.html");
+            }
+            getDriver().navigate().back();
+
         }
     }
 
     public void enterCredentials(List<List<String>> listOfCredentials) {
-        for (List<String> credentials : listOfCredentials){
+
+        boolean isAllDataEntered = true;
+        for (List<String> credentials : listOfCredentials) {
+            userNameField.clear();
             userNameField.sendKeys(credentials.get(0));
+            passwordField.clear();
             passwordField.sendKeys(credentials.get(1));
+            commentField.clear();
             commentField.sendKeys(credentials.get(2));
 
             try {
@@ -62,26 +82,31 @@ public class EvilTesterFormPage {
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            userNameField.clear();
-            passwordField.clear();
-            commentField.clear();
-
+            // Seneryayo çevirirsek
+            submitButton.click();
+            EvilTesterFormDetailsPage detailsPage = new EvilTesterFormDetailsPage();
+            if (!detailsPage.isCommentLineContain(credentials.get(2))) {
+                isAllDataEntered = false;
+                getDriver().get("https://testpages.eviltester.com/styled/basic-html-form-test.html");
+            }
+            getDriver().navigate().back();
         }
-
-
+        System.out.println("Bütün değerler başarı ile girildi : " + isAllDataEntered);
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

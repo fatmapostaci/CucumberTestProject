@@ -1,5 +1,6 @@
 package ondia.utils;
 
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -7,8 +8,12 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.Duration;
 
 public class Driver {
@@ -58,6 +63,16 @@ public class Driver {
                         throw new WebDriverException("Your OS doesn't support Safari");
                     }
                     driver = new SafariDriver();
+                    break;
+                case "remote":
+                    DesiredCapabilities capabilities = new DesiredCapabilities();
+                    capabilities.setCapability("browserName",ConfigReader.getProperty("remote_browser"));
+                    capabilities.setCapability("platformName", Platform.WIN11);
+                    try {
+                        driver = new RemoteWebDriver(new URL("http://192.168.1.121:4444"),capabilities);
+                    } catch (MalformedURLException e) {
+                        throw new RuntimeException(e);
+                    }
                     break;
                 default:
                     // Varsayılan olarak Chrome sürücüsünü ayarla ve oluştur
